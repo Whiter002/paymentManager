@@ -40,6 +40,8 @@
             this.load_original_data = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(12, 88);
+            this.chart1.Location = new System.Drawing.Point(9, 44);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn;
@@ -108,7 +110,7 @@
             // 
             // load_original_data
             // 
-            this.load_original_data.Location = new System.Drawing.Point(639, 509);
+            this.load_original_data.Location = new System.Drawing.Point(9, 465);
             this.load_original_data.Name = "load_original_data";
             this.load_original_data.Size = new System.Drawing.Size(149, 23);
             this.load_original_data.TabIndex = 1;
@@ -120,7 +122,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(291, 53);
+            this.label1.Location = new System.Drawing.Point(288, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 21);
             this.label1.TabIndex = 2;
@@ -129,16 +131,36 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(794, 102);
+            this.panel1.Location = new System.Drawing.Point(791, 58);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(236, 401);
             this.panel1.TabIndex = 4;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(684, 465);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(91, 23);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "新しい支払い";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(164, 465);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "設定";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 537);
+            this.ClientSize = new System.Drawing.Size(787, 495);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.load_original_data);
@@ -157,6 +179,8 @@
         private System.Windows.Forms.Button load_original_data;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
