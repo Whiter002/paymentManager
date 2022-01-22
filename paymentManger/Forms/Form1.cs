@@ -316,5 +316,17 @@ namespace paymentManger
         {
 
         }
+
+        private void OpenSettingForm_Button_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            SettingOptionsForm sof = new SettingOptionsForm();
+            DialogResult dr = sof.ShowDialog();
+            if(dr == DialogResult.OK)
+            {
+
+            }
+            this.Enabled = true;
+        }
     }
 }
