@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("あｓｄｆ");
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("あｓｄｆ");
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -74,8 +72,6 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
             this.listView1.Location = new System.Drawing.Point(0, 174);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(305, 97);
@@ -116,8 +112,6 @@
             // listView2
             // 
             this.listView2.HideSelection = false;
-            this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.listView2.Location = new System.Drawing.Point(0, 30);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(305, 99);
