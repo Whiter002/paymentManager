@@ -20,6 +20,16 @@ namespace paymentManger
         {
             return other_Series[id];
         }
+        internal string[] AllSeriesNames
+        {
+            get
+            {
+                List<string> names = new List<string>();
+                names.Add(DefaultSeries);
+                names.AddRange(other_Series.Values.ToArray());
+                return names.ToArray();
+            }
+        }
         internal int GetCustomSeriesCount()
         {
             return get_custom_only_dictionary().Count;

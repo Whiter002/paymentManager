@@ -39,7 +39,7 @@ namespace paymentManger
         public Form1()
         {
             InitializeComponent();
-
+            ConfigDatas.LoadJsonFiles(base_path);
             GenerateControls_ini();
 
             //Regist index of genre to struct
@@ -222,17 +222,19 @@ namespace paymentManger
         }
         private void GenerateControls_ini()
         {
-            int ind = 0;
-            foreach (var serie in this.chart1.Series)
+            foreach(string name in ConfigDatas.AllSeriesNames)
             {
-                serie.Name = ind + "";
-                ind++;
-            }
-            ind = 0;
-            foreach (var serie in this.chart1.Series)
-            {
-                serie.Name = genre[ind];
-                ind++;
+                System.Windows.Forms.DataVisualization.Charting.Series series = new System.Windows.Forms.DataVisualization.Charting.Series()
+                {
+
+                    ChartArea = "ChartArea1",
+                    ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn,
+                    Legend = "Legend1",
+                    Name = name,
+                    XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime,
+                    YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32
+                };
+                this.chart1.Series.Add(series);
             }
             Point ini_location = new Point(0, 0);
             int del_y = 22;

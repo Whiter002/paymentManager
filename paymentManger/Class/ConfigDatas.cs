@@ -138,6 +138,10 @@ namespace paymentManger
         {
             get { return sd.DefaultSeries; }
         }
+        static internal string[] AllSeriesNames
+        {
+            get { return sd.AllSeriesNames; }
+        }
 
         #region DebugOnlyFunctoins
 #if DEBUG
