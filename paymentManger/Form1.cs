@@ -22,6 +22,20 @@ namespace paymentManger
         string base_path = Path.Combine(Application.StartupPath);
 
 #endif
+        string[] genre = new string[6]
+        {
+            "分割払い","サブスク(娯楽)","光熱費等","ネットスーパ","娯楽","STEAMの支払い"
+        };
+        private struct genre_Index
+        {
+            internal int INSTALL_PAYMENT;
+            internal int SUBSCRIBE_TOFUN;
+            internal int PAYMENT_TOLIVE;
+            internal int PAY_FORNETSPER;
+            internal int DEFAULT;
+            internal int PAY_FORSTEAM;
+        }
+        genre_Index Indexes = new genre_Index();
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +44,12 @@ namespace paymentManger
 
             //Regist index of genre to struct
 
+            Indexes.INSTALL_PAYMENT = Array.IndexOf(genre, "分割払い");
+            Indexes.SUBSCRIBE_TOFUN = Array.IndexOf(genre, "サブスク(娯楽)");
+            Indexes.PAYMENT_TOLIVE = Array.IndexOf(genre, "光熱費等");
+            Indexes.PAY_FORNETSPER = Array.IndexOf(genre, "ネットスーパ");
+            Indexes.DEFAULT = Array.IndexOf(genre, "娯楽");
+            Indexes.PAY_FORSTEAM = Array.IndexOf(genre, "STEAMの支払い");
 
         }
         private void load_original_data_Click(object sender, EventArgs e)
@@ -41,23 +61,19 @@ namespace paymentManger
             csv_datas.Clear();
             string load_dir = Path.Combine(base_path, "data", "csv", "original");
             string[] files = Directory.GetFiles(load_dir);
-            List<string> csv_file_name = new List<string>();
+            List<string> object_date = new List<string>();
             foreach (string file in files)
             {
 
                 csv_datas.Add(CsvLoader.LoadCSVFile(file, "\""));
                 string date = Path.GetFileNameWithoutExtension(file);
-                csv_file_name.Add(date);
+                object_date.Add(date);
 
             }
             for (int i = 0; i < csv_datas.Count; i++)
             {
-                List<string> use_columns = new List<string>()
-                {
-                    "利用日", "[0-9]{1,2}月支払金額"
-                };
-                use_columns.AddRange(ConfigDatas.UseColumns);
-                csv_datas[i].TExtract_Column_data(use_columns.ToArray());
+
+                csv_datas[i].TExtract_Column_data("利用日", "利用店名・商品名", "[0-9]{1,2}月支払金額", "支払方法");
                 csv_datas[i].Extract_condition((key, value) =>
                 {
                     if (key == "利用日")
@@ -69,17 +85,17 @@ namespace paymentManger
                     }
                     return true;
                 });
-                csv_datas[i].Regist_New_Column("支払い時期", csv_file_name[i]);
+                csv_datas[i].Regist_New_Column("支払い時期", object_date[i]);
                 csv_datas[i].RenameTitle("[0-9]{1,2}月支払金額", "当月支払金額");
                 string save_path = Path.Combine(base_path, "data", "csv", "saved_data");
 
                 if (!Directory.Exists(save_path)) Directory.CreateDirectory(save_path);
 
-                save_path = Path.Combine(save_path, csv_file_name[i] + ".csv");
+                save_path = Path.Combine(save_path, object_date[i] + ".csv");
                 SetGenreToCsv(csv_datas[i]);
                 csv_datas[i].ToFile(save_path);
 
-            }//データを整理する
+            }
             ResetGraphItemFromCsvDatas();
             SaveOptimizedCsv();
 
@@ -94,22 +110,58 @@ namespace paymentManger
         private void SetGenreToCsv(CSV csv_data)
         {
             
-            csv_data.Regist_New_Column("ジャンル", ConfigDatas.DefaultGenre);
-            ConfigDatas.Classificate(csv_data);
+            csv_data.Regist_New_Column("ジャンル", genre[Indexes.DEFAULT]);
+            IDictionary< List<string>,string> genre_trigger = new Dictionary<List<string>,string>()
+            {
+                {new List<string>(){"*YOUTUBE","ニコニコプレミアム","ｱﾏｿﾞﾝﾌﾟﾗｲﾑｶｲﾋ","ﾈｯﾄﾌﾘｯｸｽ"},genre[Indexes.SUBSCRIBE_TOFUN]},
+                {new List<string>(){"KDDI", "ｿﾌﾄﾊﾞﾝｸM", "ﾄｳｷﾖｳﾃﾞﾝﾘﾖｸ","ガス" },genre[Indexes.PAYMENT_TOLIVE]},
+                {new List<string>(){"STEAM"},genre[Indexes.PAY_FORSTEAM]},
+                {new List<string>(){"ネットスーパー"},genre[Indexes.PAY_FORNETSPER]}
+            };
+
+            csv_data.do_func((csv) =>
+            {
+
+                int line = 0;
+                foreach (string value in csv.GetRowData("利用店名・商品名"))
+                {
+
+                    foreach (List<string> keys in genre_trigger.Keys.ToList())
+                    {
+                        foreach (string key in keys)
+                        {
+                            if (value.IndexOf(key)!=-1)
+                            {
+                                csv.EditItemValue("ジャンル", line, genre_trigger[keys]);
+                            }
+                        }
+                    }
+                    line++;
+                }
+                line = 0;
+                foreach(string value in csv.GetRowData("支払方法"))
+                {
+                    if (value.IndexOf("分割") != -1)
+                    {
+                        csv.EditItemValue("ジャンル", line, genre[Indexes.INSTALL_PAYMENT]);
+                    }
+                    line++;
+                }
+            });
 
         }
         private void ResetGraphItemFromCsvDatas()
         {
-            for(int i = 0; i < ConfigDatas.SeriesNameCount; i++)
+            for(int i = 0; i < genre.Length; i++)
             {
                 this.chart1.Series[i].Points.Clear();
             }
             foreach (CSV csv_data in csv_datas)
             {
-                for (int i = 0; i < ConfigDatas.SeriesNameCount; i++)
+                for (int i = 0; i < genre.Length; i++)
                 {
                     DateTime time = DateTime.Parse(csv_data.GetCellData("支払い時期", 0));
-                    int sum = GetmaxPaymentFromCsv(csv_data,ConfigDatas.AllSeriesNames[i]);
+                    int sum = GetmaxPaymentFromCsv(csv_data,genre[i]);
                     this.chart1.Series[i].Points.AddXY(time, sum);
                 }
 

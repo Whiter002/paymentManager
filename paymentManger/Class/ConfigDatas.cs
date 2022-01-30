@@ -16,7 +16,7 @@ namespace paymentManger
 
         static SeriesDatas sd = new SeriesDatas();
         static Dictionary<string,SeriesClassificationData> SeriesClassifications = new Dictionary<string, SeriesClassificationData>();
-        static List<string> use_columns = new List<string>();
+
         static private string Read_Json_(string path)
         {
             StreamReader sr = new StreamReader(path);
@@ -47,21 +47,7 @@ namespace paymentManger
             json_str = File.ReadAllText(pathes[1]);
 
             SeriesClassifications = JsonSerializer.Deserialize<Dictionary<string, SeriesClassificationData>>(json_str);
-            GetColumns();
 
-        }
-        static private void GetColumns()
-        {
-            List<string> columns = new List<string>();
-            foreach(SeriesClassificationData scd in SeriesClassifications.Values)
-            {
-                var new_columns = (from x in scd.BasesSeries where !columns.Contains(x) select scd.BasesSeries).ToArray();
-                if (new_columns.Length == 0) continue;
-                columns.AddRange(new_columns[0]);
-
-            }
-            use_columns.Clear();
-            use_columns.AddRange(columns);
         }
 
         static internal void Classificate(CSV csv)
@@ -156,14 +142,7 @@ namespace paymentManger
         {
             get { return sd.AllSeriesNames; }
         }
-        static internal int SeriesNameCount
-        {
-            get { return AllSeriesNames.Length; }
-        }
-        static internal string[] UseColumns
-        {
-            get { return use_columns.ToArray(); }
-        }
+
         #region DebugOnlyFunctoins
 #if DEBUG
         static internal void Json_Test()
