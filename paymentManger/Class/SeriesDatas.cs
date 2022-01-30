@@ -42,6 +42,10 @@ namespace paymentManger
         {
             get { return default_Series; }
         }
+        internal string OtherSeriesFromName(string name)
+        {
+            return other_Series[name];
+        }
         private IDictionary<string, string> get_custom_only_dictionary()
         {
             IDictionary<string, string> dic = new Dictionary<string , string>();

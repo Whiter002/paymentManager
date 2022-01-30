@@ -15,5 +15,13 @@ namespace paymentManger
         public string op { get; set; }
         [JsonPropertyName("com_value")]
         public List<string> com_value { get; set; }
+
+
+        internal string[] BasesSeries { get { return bases_series.ToArray(); } }
+        internal string[] ComValue { get { return com_value.ToArray(); } }
+        internal string Operators { get { return op; } }
+
+
+
     }
 }
