@@ -276,7 +276,7 @@ namespace paymentManger
         {
 
             //CSVLoaderのテスト
-            CSV csv_data = CsvLoader.LoadCSVFile(Path.Combine(Directory.GetCurrentDirectory(), "data", "test", "csv", "test_data01.csv"));
+            CSV csv_data = CsvLoader.LoadCSVFile(Path.Combine(base_path, "data", "csv","test", "test_data01.csv"));
 
             //CSVクラスのテスト
             int count = csv_data.ItemCount;
@@ -306,6 +306,10 @@ namespace paymentManger
             var csv_str_data = csv_data.ToString();
 
             csv_data = CsvLoader.LoadCSVFile(Path.Combine(Directory.GetCurrentDirectory(), "data", "test", "csv", "test_data00.csv"));
+
+            //jsonのテスト
+            ConfigDatas.Json_Test();
+
 
         }
 #endif
