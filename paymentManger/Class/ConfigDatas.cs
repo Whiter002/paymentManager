@@ -64,7 +64,7 @@ namespace paymentManger
                     foreach(string label in scd.BasesSeries)
                     {
                         string data = csv.GetCellData(label,i);
-                        Classificate(id, data, csv, scd, label, i);
+                        Classificate(id, data, csv, scd, i);
                     }
 
                 }
@@ -73,39 +73,39 @@ namespace paymentManger
             }
 
         }
-        static private void Classificate(string id, string data,CSV csv,SeriesClassificationData scd,string label,int i)
+        static private void Classificate(string id, string data,CSV csv,SeriesClassificationData scd,int i)
         {
-
+            string genre = sd.OtherSeriesFromName(id);
+            string column_name = "ジャンル";
             foreach (string com_value in scd.ComValue)
             {
-                string genre = sd.OtherSeriesFromName(id);
                 switch (scd.Operators)
                 {
                     case "eq":
                         if (data == com_value)
                         {
-                            csv.EditItemValue(label, i, genre);
+                            csv.EditItemValue(column_name, i, genre);
                             return;
                         }
                         break;
                     case "neq":
                         if (data != com_value)
                         {
-                            csv.EditItemValue(label, i, genre);
+                            csv.EditItemValue(column_name, i, genre);
                             return;
                         }
                         break;
                     case "in":
                         if (data.IndexOf(com_value) != -1)
                         {
-                            csv.EditItemValue(label, i, genre);
+                            csv.EditItemValue(column_name, i, genre);
                             return;
                         }
                         break;
                     case "nin":
                         if (data.IndexOf(com_value) == -1)
                         {
-                            csv.EditItemValue(label, i, genre);
+                            csv.EditItemValue(column_name, i, genre);
                             return;
                         }
                         break;
@@ -114,7 +114,7 @@ namespace paymentManger
                         if (toInt_le < int.Parse(com_value))
                         {
 
-                            csv.EditItemValue(label, i, genre);
+                            csv.EditItemValue(column_name, i, genre);
                             return;
                         }
                         break;
@@ -123,7 +123,7 @@ namespace paymentManger
                         if (toInt_mo > int.Parse(com_value))
                         {
 
-                            csv.EditItemValue(label, i, genre);
+                            csv.EditItemValue(column_name, i, genre);
                             return;
                         }
                         break;

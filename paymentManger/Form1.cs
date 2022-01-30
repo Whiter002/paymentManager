@@ -42,7 +42,6 @@ namespace paymentManger
 
             GenerateControls_ini();
 
-
             //Regist index of genre to struct
 
             Indexes.INSTALL_PAYMENT = Array.IndexOf(genre, "分割払い");
@@ -110,6 +109,7 @@ namespace paymentManger
         }
         private void SetGenreToCsv(CSV csv_data)
         {
+            
             csv_data.Regist_New_Column("ジャンル", genre[Indexes.DEFAULT]);
             IDictionary< List<string>,string> genre_trigger = new Dictionary<List<string>,string>()
             {
@@ -309,6 +309,12 @@ namespace paymentManger
 
             //jsonのテスト
             ConfigDatas.Json_Test();
+
+            ConfigDatas.LoadJsonFiles(base_path);
+            dup = CsvLoader.LoadCSVFile(Path.Combine(base_path,"data","csv","saved_data", "2021-12.csv"), "\"");
+            dup.Delete_Column_data("ジャンル");
+            dup.Regist_New_Column("ジャンル",ConfigDatas.DefaultGenre);
+            ConfigDatas.Classificate(dup);
 
 
         }
