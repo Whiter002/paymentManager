@@ -305,7 +305,7 @@ namespace paymentManger
             csv_data.RenameTitle("test[13]", "Remamed");
             var csv_str_data = csv_data.ToString();
 
-            csv_data = CsvLoader.LoadCSVFile(Path.Combine(Directory.GetCurrentDirectory(), "data", "test", "csv", "test_data00.csv"));
+            //csv_data = CsvLoader.LoadCSVFile(Path.Combine(Directory.GetCurrentDirectory(), "data", "test", "csv", "test_data00.csv"));
 
             //jsonのテスト
             ConfigDatas.Json_Test();

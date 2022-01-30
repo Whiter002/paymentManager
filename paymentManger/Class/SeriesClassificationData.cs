@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
-namespace paymentManger.Class
+namespace paymentManger
 {
-    internal class SeriesClassificationData
+    public class SeriesClassificationData
     {
-        List<string> bases_series = new List<string>();
-        string op = "";
-        List<string> com_value = new List<string>();
+        [JsonPropertyName("based_series")]
+        public List<string> bases_series { get; set; }
+        [JsonPropertyName("op")]
+        public string op { get; set; }
+        [JsonPropertyName("com_value")]
+        public List<string> com_value { get; set; }
     }
 }

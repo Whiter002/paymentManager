@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace paymentManger.Class
+namespace paymentManger
 {
-    internal class SeriesDatas
+    public class SeriesDatas
     {
-        string default_Series = "";
-        IDictionary<string,string> other_Series = new Dictionary<string,string>();
-
-
+        [JsonPropertyName("default_Series")]
+        public string default_Series{ get; set; }
+        [JsonPropertyName("other_Series")]
+        public Dictionary<string, string> other_Series { get; set; }
 
 
         internal string SeriesName(string id)
