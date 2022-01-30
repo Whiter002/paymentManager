@@ -30,7 +30,6 @@ namespace paymentManger
 
             //Regist index of genre to struct
 
-
         }
         private void load_original_data_Click(object sender, EventArgs e)
         {
@@ -93,7 +92,6 @@ namespace paymentManger
         }
         private void SetGenreToCsv(CSV csv_data)
         {
-            
             csv_data.Regist_New_Column("ジャンル", ConfigDatas.DefaultGenre);
             ConfigDatas.Classificate(csv_data);
 
@@ -266,7 +264,6 @@ namespace paymentManger
             dup.Regist_New_Column("ジャンル",ConfigDatas.DefaultGenre);
             ConfigDatas.Classificate(dup);
 
-
         }
 #endif
         #endregion
@@ -275,6 +272,18 @@ namespace paymentManger
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void OpenSettingForm_Button_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            SettingOptionsForm sof = new SettingOptionsForm();
+            DialogResult dr = sof.ShowDialog();
+            if(dr == DialogResult.OK)
+            {
+
+            }
+            this.Enabled = true;
         }
     }
 }

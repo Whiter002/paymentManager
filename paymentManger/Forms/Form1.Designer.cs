@@ -34,6 +34,8 @@
             this.load_original_data = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.OpenSettingForm_Button = new System.Windows.Forms.Button();
+          
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +62,7 @@
             // 
             // load_original_data
             // 
-            this.load_original_data.Location = new System.Drawing.Point(639, 509);
+            this.load_original_data.Location = new System.Drawing.Point(550, 465);
             this.load_original_data.Name = "load_original_data";
             this.load_original_data.Size = new System.Drawing.Size(149, 23);
             this.load_original_data.TabIndex = 1;
@@ -72,7 +74,8 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(291, 53);
+
+            this.label1.Location = new System.Drawing.Point(288, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 21);
             this.label1.TabIndex = 2;
@@ -81,16 +84,27 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(794, 102);
+            this.panel1.Location = new System.Drawing.Point(791, 58);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(236, 401);
             this.panel1.TabIndex = 4;
+            // 
+            // OpenSettingForm_Button
+            // 
+            this.OpenSettingForm_Button.Location = new System.Drawing.Point(705, 465);
+            this.OpenSettingForm_Button.Name = "OpenSettingForm_Button";
+            this.OpenSettingForm_Button.Size = new System.Drawing.Size(75, 23);
+            this.OpenSettingForm_Button.TabIndex = 5;
+            this.OpenSettingForm_Button.Text = "設定";
+            this.OpenSettingForm_Button.UseVisualStyleBackColor = true;
+            this.OpenSettingForm_Button.Click += new System.EventHandler(this.OpenSettingForm_Button_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 537);
+            this.ClientSize = new System.Drawing.Size(787, 495);
+            this.Controls.Add(this.OpenSettingForm_Button);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.load_original_data);
@@ -109,6 +123,7 @@
         private System.Windows.Forms.Button load_original_data;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button OpenSettingForm_Button;
     }
 }
 
