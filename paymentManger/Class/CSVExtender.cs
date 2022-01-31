@@ -29,7 +29,7 @@ namespace paymentManger.Class
                 var classification = classifications[i];
                 foreach(var kvp in classification)
                 {
-
+                    if (!csv.ExistedColumn(kvp.Key)) return;
                     string original_data = csv.GetCellData(kvp.Key, num);
                     List<string> com_value = kvp.Value.Com_value;
 

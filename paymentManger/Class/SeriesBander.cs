@@ -79,10 +79,8 @@ namespace paymentManger.Class
                     if (list_pri < sorted_pri)
                     {
                         sorted_series_less.Insert(j, all_series_datas[i]);
-                        continue;
-                    }
-
-                    if (i-1 == j)
+                        break;
+                    }else if (i-1 == j)
                     {
                         sorted_series_less.Add(all_series_datas[i]);
                     }
@@ -109,10 +107,8 @@ namespace paymentManger.Class
                     if (list_pri < sorted_pri)
                     {
                         sorted_series_less.Insert(j, all_series_datas[i]);
-                        continue;
-                    }
-
-                    if (i - 1 == j)
+                        break;
+                    }else if (i - 1 == j)
                     {
                         sorted_series_less.Add(all_series_datas[i]);
                     }

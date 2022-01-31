@@ -143,8 +143,7 @@ namespace paymentManger
         }
         internal string GetCellData(string column_name,int row_number)
         {
-
-            return csv_data[column_name][row_number];
+                return csv_data[column_name][row_number];
 
         }
         internal string[] GetRowData(string column_name)
@@ -172,6 +171,17 @@ namespace paymentManger
 
             }
             return dup_obj;
+        }
+
+        internal bool ExistedColumn(string name)
+        {
+
+            if (csv_data.ContainsKey(name))
+            {
+                return true;
+            }
+            return false;
+
         }
 
         private void Updatekeys()
@@ -203,7 +213,7 @@ namespace paymentManger
             }
             return str_data;
         }
-
+        
         public override bool Equals(object obj)
         {
 

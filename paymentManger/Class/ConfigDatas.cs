@@ -17,8 +17,13 @@ namespace paymentManger
 
         static SeriesDatas sd = new SeriesDatas();
         static Dictionary<string,SeriesClassificationData> SeriesClassifications = new Dictionary<string, SeriesClassificationData>();
-        SeriesBander sb;
+#if DEBUG
+        static public SeriesBander sb;
+#else
+        static SeriesBander sb;
+#endif
         static List<string> use_columns = new List<string>();
+
         static private string Read_Json_(string path)
         {
             StreamReader sr = new StreamReader(path);
@@ -26,6 +31,7 @@ namespace paymentManger
             sr.Close();
             return json;
         }
+
         static internal void LoadJsonFiles(string base_path)
         {
             string config_dir = Path.Combine(base_path, "data", "config");
@@ -166,7 +172,7 @@ namespace paymentManger
         {
             get { return use_columns.ToArray(); }
         }
-        #region DebugOnlyFunctoins
+#region DebugOnlyFunctoins
 #if DEBUG
         static internal void Json_Test()
         {
@@ -207,10 +213,13 @@ namespace paymentManger
             json_str = Read_Json_Debug(3);
             var load_json4 = JsonSerializer.Deserialize<SeriesBander>(json_str, options);
 
+
             string bander_json = JsonSerializer.Serialize(load_json4,options);
             var reload_json = JsonSerializer.Deserialize<SeriesBander>(bander_json, options);
 
             reload_json.Initialize();
+
+            sb = reload_json;
 
         }
         static private string Read_Json_Debug(int file_num)
@@ -232,6 +241,6 @@ namespace paymentManger
             public int view_num { get; set; }
         }
 #endif
-        #endregion
+#endregion
     }
 }

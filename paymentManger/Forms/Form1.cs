@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using paymentManger.Forms;
+using paymentManger.Class;
 
 namespace paymentManger
 {
@@ -263,8 +264,7 @@ namespace paymentManger
             dup = CsvLoader.LoadCSVFile(Path.Combine(base_path,"data","csv","saved_data", "2021-12.csv"), "\"");
             dup.Delete_Column_data("ジャンル");
             dup.Regist_New_Column("ジャンル",ConfigDatas.DefaultGenre);
-            ConfigDatas.Classificate(dup);
-
+            CSVExtender.ChangeGenreInCSV(ConfigDatas.sb, dup);
         }
 #endif
         #endregion
