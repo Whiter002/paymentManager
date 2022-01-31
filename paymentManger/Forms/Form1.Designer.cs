@@ -28,33 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.load_original_data = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.OpenSettingForm_Button = new System.Windows.Forms.Button();
-          
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.分類の追加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.支払い情報の追加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
-            chartArea1.AxisX.LabelStyle.Format = "yy/MM";
-            chartArea1.AxisX.LabelStyle.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
-            chartArea1.AxisX.ScaleView.SmallScrollMinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
-            chartArea1.AxisX.ScaleView.SmallScrollSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
-            chartArea1.AxisX.ScaleView.Zoomable = false;
-            chartArea1.AxisX.Title = "年/月";
-            chartArea1.AxisY.Title = "円";
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(12, 88);
+            chartArea7.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
+            chartArea7.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
+            chartArea7.AxisX.LabelStyle.Format = "yy/MM";
+            chartArea7.AxisX.LabelStyle.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
+            chartArea7.AxisX.ScaleView.SmallScrollMinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
+            chartArea7.AxisX.ScaleView.SmallScrollSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
+            chartArea7.AxisX.ScaleView.Zoomable = false;
+            chartArea7.AxisX.Title = "年/月";
+            chartArea7.AxisY.Title = "円";
+            chartArea7.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart1.Legends.Add(legend7);
+            this.chart1.Location = new System.Drawing.Point(11, 49);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(776, 415);
             this.chart1.TabIndex = 0;
@@ -62,7 +65,7 @@
             // 
             // load_original_data
             // 
-            this.load_original_data.Location = new System.Drawing.Point(550, 465);
+            this.load_original_data.Location = new System.Drawing.Point(638, 470);
             this.load_original_data.Name = "load_original_data";
             this.load_original_data.Size = new System.Drawing.Size(149, 23);
             this.load_original_data.TabIndex = 1;
@@ -74,8 +77,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-
-            this.label1.Location = new System.Drawing.Point(288, 9);
+            this.label1.Location = new System.Drawing.Point(296, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 21);
             this.label1.TabIndex = 2;
@@ -89,29 +91,55 @@
             this.panel1.Size = new System.Drawing.Size(236, 401);
             this.panel1.TabIndex = 4;
             // 
-            // OpenSettingForm_Button
+            // menuStrip1
             // 
-            this.OpenSettingForm_Button.Location = new System.Drawing.Point(705, 465);
-            this.OpenSettingForm_Button.Name = "OpenSettingForm_Button";
-            this.OpenSettingForm_Button.Size = new System.Drawing.Size(75, 23);
-            this.OpenSettingForm_Button.TabIndex = 5;
-            this.OpenSettingForm_Button.Text = "設定";
-            this.OpenSettingForm_Button.UseVisualStyleBackColor = true;
-            this.OpenSettingForm_Button.Click += new System.EventHandler(this.OpenSettingForm_Button_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.設定ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(807, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 設定ToolStripMenuItem
+            // 
+            this.設定ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.分類の追加ToolStripMenuItem,
+            this.支払い情報の追加ToolStripMenuItem});
+            this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.設定ToolStripMenuItem.Text = "設定";
+            // 
+            // 分類の追加ToolStripMenuItem
+            // 
+            this.分類の追加ToolStripMenuItem.Name = "分類の追加ToolStripMenuItem";
+            this.分類の追加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.分類の追加ToolStripMenuItem.Text = "分類の追加";
+            this.分類の追加ToolStripMenuItem.Click += new System.EventHandler(this.分類の追加ToolStripMenuItem_Click);
+            // 
+            // 支払い情報の追加ToolStripMenuItem
+            // 
+            this.支払い情報の追加ToolStripMenuItem.Name = "支払い情報の追加ToolStripMenuItem";
+            this.支払い情報の追加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.支払い情報の追加ToolStripMenuItem.Text = "支払いの追加";
+            this.支払い情報の追加ToolStripMenuItem.Click += new System.EventHandler(this.支払い情報の追加ToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 495);
-            this.Controls.Add(this.OpenSettingForm_Button);
+            this.ClientSize = new System.Drawing.Size(807, 499);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.load_original_data);
             this.Controls.Add(this.chart1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,7 +151,10 @@
         private System.Windows.Forms.Button load_original_data;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button OpenSettingForm_Button;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 設定ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 分類の追加ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 支払い情報の追加ToolStripMenuItem;
     }
 }
 

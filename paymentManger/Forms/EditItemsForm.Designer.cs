@@ -1,6 +1,6 @@
 ﻿namespace paymentManger
 {
-    partial class SettingOptionsForm
+    partial class EditItemsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -67,7 +67,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(12, 326);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(315, 333);
             this.groupBox2.TabIndex = 0;
@@ -228,7 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 662);
+            this.ClientSize = new System.Drawing.Size(339, 355);
             this.Controls.Add(this.groupBox2);
             this.Name = "SettingOptionsForm";
             this.Text = "詳細設定";

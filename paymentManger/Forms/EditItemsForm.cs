@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace paymentManger
 {
-    public partial class SettingOptionsForm : Form
+    public partial class EditItemsForm : Form
     {
-        public SettingOptionsForm()
+        public EditItemsForm()
         {
             InitializeComponent();
         }

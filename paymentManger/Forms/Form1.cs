@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using paymentManger.Forms;
 
 namespace paymentManger
 {
@@ -269,21 +270,21 @@ namespace paymentManger
         #endregion
 
 
-        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-        {
 
+        private void 分類の追加ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new EditSeriesForm());
         }
-
-        private void OpenSettingForm_Button_Click(object sender, EventArgs e)
+        private void 支払い情報の追加ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
-            SettingOptionsForm sof = new SettingOptionsForm();
-            DialogResult dr = sof.ShowDialog();
-            if(dr == DialogResult.OK)
-            {
-
-            }
+            OpenForm(new EditItemsForm());
+        }
+        private void OpenForm(Form form,bool this_enabled=false)
+        {
+            this.Enabled = this_enabled;
+            DialogResult dr = form.ShowDialog();
             this.Enabled = true;
         }
+
     }
 }

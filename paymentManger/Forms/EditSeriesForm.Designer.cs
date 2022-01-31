@@ -28,40 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Test1");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Test2");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Test1");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Test2");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditSeriesForm));
-            this.button1 = new System.Windows.Forms.Button();
+            this.add_series_button = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.item_up_button = new System.Windows.Forms.Button();
+            this.item_down_button = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.add_classsification_button = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // add_series_button
             // 
-            this.button1.Location = new System.Drawing.Point(172, 221);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "追加";
-            this.button1.UseVisualStyleBackColor = true;
+            this.add_series_button.Location = new System.Drawing.Point(172, 221);
+            this.add_series_button.Name = "add_series_button";
+            this.add_series_button.Size = new System.Drawing.Size(119, 23);
+            this.add_series_button.TabIndex = 0;
+            this.add_series_button.Text = "追加";
+            this.add_series_button.UseVisualStyleBackColor = true;
             // 
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
             this.listView1.Location = new System.Drawing.Point(12, 33);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(279, 182);
@@ -87,23 +87,23 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "分類基準";
             // 
-            // button2
+            // item_up_button
             // 
-            this.button2.Location = new System.Drawing.Point(12, 221);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "↑";
-            this.button2.UseVisualStyleBackColor = true;
+            this.item_up_button.Location = new System.Drawing.Point(12, 221);
+            this.item_up_button.Name = "item_up_button";
+            this.item_up_button.Size = new System.Drawing.Size(34, 23);
+            this.item_up_button.TabIndex = 0;
+            this.item_up_button.Text = "↑";
+            this.item_up_button.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // item_down_button
             // 
-            this.button3.Location = new System.Drawing.Point(52, 221);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(34, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "↓";
-            this.button3.UseVisualStyleBackColor = true;
+            this.item_down_button.Location = new System.Drawing.Point(52, 221);
+            this.item_down_button.Name = "item_down_button";
+            this.item_down_button.Size = new System.Drawing.Size(34, 23);
+            this.item_down_button.TabIndex = 0;
+            this.item_down_button.Text = "↓";
+            this.item_down_button.UseVisualStyleBackColor = true;
             // 
             // listView2
             // 
@@ -119,14 +119,28 @@
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
             // 
-            // button4
+            // columnHeader1
             // 
-            this.button4.Location = new System.Drawing.Point(461, 221);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(119, 23);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "追加";
-            this.button4.UseVisualStyleBackColor = true;
+            this.columnHeader1.Text = "項目名";
+            this.columnHeader1.Width = 101;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "op";
+            this.columnHeader2.Width = 29;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "値";
+            // 
+            // add_classsification_button
+            // 
+            this.add_classsification_button.Location = new System.Drawing.Point(461, 221);
+            this.add_classsification_button.Name = "add_classsification_button";
+            this.add_classsification_button.Size = new System.Drawing.Size(119, 23);
+            this.add_classsification_button.TabIndex = 0;
+            this.add_classsification_button.Text = "追加";
+            this.add_classsification_button.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -146,20 +160,6 @@
             this.label4.TabIndex = 4;
             this.label4.Text = resources.GetString("label4.Text");
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "項目名";
-            this.columnHeader1.Width = 101;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "op";
-            this.columnHeader2.Width = 29;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "値";
-            // 
             // EditSeriesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -171,10 +171,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.item_down_button);
+            this.Controls.Add(this.item_up_button);
+            this.Controls.Add(this.add_classsification_button);
+            this.Controls.Add(this.add_series_button);
             this.Name = "EditSeriesForm";
             this.Text = "EditSeriesForm";
             this.ResumeLayout(false);
@@ -184,14 +184,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button add_series_button;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button item_up_button;
+        private System.Windows.Forms.Button item_down_button;
         private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button add_classsification_button;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
