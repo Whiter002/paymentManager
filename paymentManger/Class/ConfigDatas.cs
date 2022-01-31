@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.Encodings.Web;
+using paymentManger.Class;
 
 namespace paymentManger
 {
@@ -16,6 +17,7 @@ namespace paymentManger
 
         static SeriesDatas sd = new SeriesDatas();
         static Dictionary<string,SeriesClassificationData> SeriesClassifications = new Dictionary<string, SeriesClassificationData>();
+        SeriesBander sb;
         static List<string> use_columns = new List<string>();
         static private string Read_Json_(string path)
         {
@@ -169,7 +171,7 @@ namespace paymentManger
         static internal void Json_Test()
         {
 
-        IDictionary<string, string> test = new Dictionary<string, string>()
+            IDictionary<string, string> test = new Dictionary<string, string>()
             {
                 {"Test1","are"},
                 {"Test2","rate"},
@@ -184,16 +186,31 @@ namespace paymentManger
                 // JavaScriptEncoder.Createでエンコードしない文字を指定するのも可
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 // 読みやすいようインデントを付ける
-                WriteIndented = true
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true
             };
 
 
             string json_str = Read_Json_Debug(0);
             var load_json1 = JsonSerializer.Deserialize<SeriesDatas>(json_str, options);
 
-            json_str = Read_Json_Debug(1);
-            var load_json2 = JsonSerializer.Deserialize<Dictionary<string,SeriesClassificationData>>(json_str,options);
+            /*
+             *
+             *jsonファイルの更新に伴ってデータの互換性が失われため
+            　json_str = Read_Json_Debug(1);
+            　var load_json2 = JsonSerializer.Deserialize<Dictionary<string,SeriesBander>>(json_str,options);
+            */
 
+            json_str = Read_Json_Debug(2);
+            var load_json3 = JsonSerializer.Deserialize<Dictionary<string, SeriesBander.ClassificatableSeriesData>>(json_str, options);
+
+            json_str = Read_Json_Debug(3);
+            var load_json4 = JsonSerializer.Deserialize<SeriesBander>(json_str, options);
+
+            string bander_json = JsonSerializer.Serialize(load_json4,options);
+            var reload_json = JsonSerializer.Deserialize<SeriesBander>(bander_json, options);
+
+            reload_json.Initialize();
 
         }
         static private string Read_Json_Debug(int file_num)
@@ -201,12 +218,18 @@ namespace paymentManger
             string[] path = new string[] {
                 Path.Combine(Application.StartupPath, @"..\..\..\..\..\..",@"data\json_test","define_series_test.json"),
                 Path.Combine(Application.StartupPath, @"..\..\..\..\..\..",@"data\json_test","difine_classification_series_test.json"),
-                Path.Combine(Application.StartupPath, @"..\..\..\..\..\..",@"data\json_test","simple_test.json")
+                Path.Combine(Application.StartupPath, @"..\..\..\..\..\..",@"data\json_test","simple_test.json"),
+                Path.Combine(Application.StartupPath, @"..\..\..\..\..\..",@"data\json_test","new_jsonTest.json")
             };
             StreamReader sr = new StreamReader(path[file_num]);
             string json = sr.ReadToEnd();
             sr.Close();
             return json;
+        }
+        public struct Dum
+        {
+            public string name { get; set; }
+            public int view_num { get; set; }
         }
 #endif
         #endregion

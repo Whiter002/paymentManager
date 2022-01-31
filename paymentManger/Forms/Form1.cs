@@ -207,7 +207,7 @@ namespace paymentManger
             // 
             // Test_Button
             // 
-            this.Test_Button.Location = new System.Drawing.Point(525, 509);
+            this.Test_Button.Location = new System.Drawing.Point(520, 470);
             this.Test_Button.Name = "Test_Button";
             this.Test_Button.Size = new System.Drawing.Size(108, 23);
             this.Test_Button.TabIndex = 3;

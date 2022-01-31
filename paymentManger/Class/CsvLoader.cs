@@ -19,6 +19,7 @@ namespace paymentManger
 
                 string line = sr.ReadLine();
 
+
                 foreach (string replace_str in ignore_strs)
                 {
                     line = line.Replace(replace_str, "");
@@ -34,6 +35,7 @@ namespace paymentManger
                     csv.Regist_Row_data(line.Split(','));
 
                 }
+                sr.Close();
                 return csv;
             }
             else
