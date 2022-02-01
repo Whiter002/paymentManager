@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using paymentManger.Forms;
+using paymentManger.Class;
 
 namespace paymentManger
 {
@@ -23,12 +24,13 @@ namespace paymentManger
         string base_path = Path.Combine(Application.StartupPath);
 
 #endif
+        string[] series_names_view;
         public Form1()
         {
             InitializeComponent();
             ConfigDatas.LoadJsonFiles(base_path);
+            series_names_view = ConfigDatas.SeriesSortByView;
             GenerateControls_ini();
-
             //Regist index of genre to struct
 
         }
@@ -45,7 +47,7 @@ namespace paymentManger
             foreach (string file in files)
             {
 
-                csv_datas.Add(CsvLoader.LoadCSVFile(file, "\""));
+                csv_datas.Add(CSV.LoadCSVFile(file, "\""));
                 string date = Path.GetFileNameWithoutExtension(file);
                 csv_file_name.Add(date);
 
@@ -108,7 +110,7 @@ namespace paymentManger
                 for (int i = 0; i < ConfigDatas.SeriesNameCount; i++)
                 {
                     DateTime time = DateTime.Parse(csv_data.GetCellData("支払い時期", 0));
-                    int sum = GetmaxPaymentFromCsv(csv_data,ConfigDatas.AllSeriesNames[i]);
+                    int sum = GetmaxPaymentFromCsv(csv_data, series_names_view[i]);
                     this.chart1.Series[i].Points.AddXY(time, sum);
                 }
 
@@ -169,7 +171,7 @@ namespace paymentManger
         }
         private void GenerateControls_ini()
         {
-            foreach(string name in ConfigDatas.AllSeriesNames)
+            foreach(string name in series_names_view)
             {
                 System.Windows.Forms.DataVisualization.Charting.Series series = new System.Windows.Forms.DataVisualization.Charting.Series()
                 {
@@ -207,7 +209,7 @@ namespace paymentManger
             // 
             // Test_Button
             // 
-            this.Test_Button.Location = new System.Drawing.Point(525, 509);
+            this.Test_Button.Location = new System.Drawing.Point(520, 470);
             this.Test_Button.Name = "Test_Button";
             this.Test_Button.Size = new System.Drawing.Size(108, 23);
             this.Test_Button.TabIndex = 3;
@@ -225,7 +227,7 @@ namespace paymentManger
         {
 
             //CSVLoaderのテスト
-            CSV csv_data = CsvLoader.LoadCSVFile(Path.Combine(base_path, "data", "csv","test", "test_data01.csv"));
+            CSV csv_data =CSV.LoadCSVFile(Path.Combine(base_path, "data", "csv","test", "test_data01.csv"));
 
             //CSVクラスのテスト
             int count = csv_data.ItemCount;
@@ -260,11 +262,10 @@ namespace paymentManger
             ConfigDatas.Json_Test();
 
             ConfigDatas.LoadJsonFiles(base_path);
-            dup = CsvLoader.LoadCSVFile(Path.Combine(base_path,"data","csv","saved_data", "2021-12.csv"), "\"");
+            dup = CSV.LoadCSVFile(Path.Combine(base_path,"data","csv","saved_data", "2021-12.csv"), "\"");
             dup.Delete_Column_data("ジャンル");
             dup.Regist_New_Column("ジャンル",ConfigDatas.DefaultGenre);
-            ConfigDatas.Classificate(dup);
-
+            CSVExtender.ChangeGenreInCSV(ConfigDatas.sb, dup);
         }
 #endif
         #endregion

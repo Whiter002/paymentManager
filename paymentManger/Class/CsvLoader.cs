@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace paymentManger
 {
-    internal static class CsvLoader
+    internal static class CsvL
     {
 
         static internal CSV LoadCSVFile(string path,params string[] ignore_strs)
@@ -18,6 +18,7 @@ namespace paymentManger
                 StreamReader sr = new StreamReader(path);
 
                 string line = sr.ReadLine();
+
 
                 foreach (string replace_str in ignore_strs)
                 {
@@ -34,6 +35,7 @@ namespace paymentManger
                     csv.Regist_Row_data(line.Split(','));
 
                 }
+                sr.Close();
                 return csv;
             }
             else
