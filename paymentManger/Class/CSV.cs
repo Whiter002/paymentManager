@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace paymentManger
 {
@@ -27,6 +28,45 @@ namespace paymentManger
 
         }
 
+        static internal CSV LoadCSVFile(string path, params string[] ignore_strs)
+        {
+            if (File.Exists(path))
+            {
+
+                StreamReader sr = new StreamReader(path);
+
+                string line = sr.ReadLine();
+
+
+                foreach (string replace_str in ignore_strs)
+                {
+                    line = line.Replace(replace_str, "");
+                }
+                CSV csv = new CSV(line.Split(','));
+                while (!sr.EndOfStream)
+                {
+                    line = sr.ReadLine();
+                    foreach (string replace_str in ignore_strs)
+                    {
+                        line = line.Replace(replace_str, "");
+                    }
+                    csv.Regist_Row_data(line.Split(','));
+
+                }
+                sr.Close();
+                return csv;
+            }
+            else
+            {
+
+                //警告
+                MessageBox.Show($"指定されたパスにファイルが存在しません\r\nPath:{path}", "読み込みエラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return new CSV();
+
+            }
+
+        }
 
         [Obsolete("テストを実施していない関数です。不具合が発生する可能性があります")]
         internal void EditItemValue(int column_number,int row_number,string value)
@@ -270,12 +310,6 @@ namespace paymentManger
                     line_num++;
                 }
             }
-        }
-        internal void do_func(Function func)
-        {
-
-            func(this);
-
         }
 
 

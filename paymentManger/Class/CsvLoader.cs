@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace paymentManger
 {
-    internal static class CsvLoader
+    internal static class CsvL
     {
 
         static internal CSV LoadCSVFile(string path,params string[] ignore_strs)

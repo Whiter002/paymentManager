@@ -15,8 +15,6 @@ namespace paymentManger
     {
         //分類情報などのコンフィグデータをここから呼び出すために作られたクラスです。
 
-        static SeriesDatas sd = new SeriesDatas();
-        static Dictionary<string,SeriesClassificationData> SeriesClassifications = new Dictionary<string, SeriesClassificationData>();
 #if DEBUG
         static public SeriesBander sb;
 #else
@@ -35,134 +33,44 @@ namespace paymentManger
         static internal void LoadJsonFiles(string base_path)
         {
             string config_dir = Path.Combine(base_path, "data", "config");
-            string[] pathes = new string[]
-            {
-                Path.Combine(config_dir,"series_names.json"),
-                Path.Combine(config_dir, "series_detail.json")
-            };
+            string path = Path.Combine(config_dir, "series_data.json");
 
-            string json_str = File.ReadAllText(pathes[0]);
             var options = new JsonSerializerOptions
             {
                 // JavaScriptEncoder.Createでエンコードしない文字を指定するのも可
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 // 読みやすいようインデントを付ける
-                WriteIndented = true
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true
             };
 
-            sd = JsonSerializer.Deserialize<SeriesDatas>(json_str);
-
-            json_str = File.ReadAllText(pathes[1]);
-
-            SeriesClassifications = JsonSerializer.Deserialize<Dictionary<string, SeriesClassificationData>>(json_str);
-            GetColumns();
+            string json_str = Read_Json(path);
+            sb = JsonSerializer.Deserialize<SeriesBander>(json_str, options);
+            sb.Initialize();
+            UpdateUsesColumns();
 
         }
-        static private void GetColumns()
+        static private void UpdateUsesColumns()
         {
-            List<string> columns = new List<string>();
-            foreach(SeriesClassificationData scd in SeriesClassifications.Values)
-            {
-                var new_columns = (from x in scd.BasesSeries where !columns.Contains(x) select scd.BasesSeries).ToArray();
-                if (new_columns.Length == 0) continue;
-                columns.AddRange(new_columns[0]);
-
-            }
             use_columns.Clear();
-            use_columns.AddRange(columns);
+            use_columns.AddRange(sb.UsedColumn);
         }
 
         static internal void Classificate(CSV csv)
         {
-
-            int item_count = csv.ItemCount;
-            for(int i = 0; i< item_count; i++)
-            {
-
-                foreach(KeyValuePair<string,SeriesClassificationData> pair in SeriesClassifications)
-                {
-                    string id = pair.Key;
-                    SeriesClassificationData scd = pair.Value;
-                    foreach(string label in scd.BasesSeries)
-                    {
-                        string data = csv.GetCellData(label,i);
-                        Classificate(id, data, csv, scd, i);
-                    }
-
-                }
-
-
-            }
-
+            CSVExtender.ChangeGenreInCSV(sb, csv);
         }
-        static private void Classificate(string id, string data,CSV csv,SeriesClassificationData scd,int i)
-        {
-            string genre = sd.OtherSeriesFromName(id);
-            string column_name = "ジャンル";
-            foreach (string com_value in scd.ComValue)
-            {
-                switch (scd.Operators)
-                {
-                    case "eq":
-                        if (data == com_value)
-                        {
-                            csv.EditItemValue(column_name, i, genre);
-                            return;
-                        }
-                        break;
-                    case "neq":
-                        if (data != com_value)
-                        {
-                            csv.EditItemValue(column_name, i, genre);
-                            return;
-                        }
-                        break;
-                    case "in":
-                        if (data.IndexOf(com_value) != -1)
-                        {
-                            csv.EditItemValue(column_name, i, genre);
-                            return;
-                        }
-                        break;
-                    case "nin":
-                        if (data.IndexOf(com_value) == -1)
-                        {
-                            csv.EditItemValue(column_name, i, genre);
-                            return;
-                        }
-                        break;
-                    case "le":
-                        int toInt_le = int.Parse(data);
-                        if (toInt_le < int.Parse(com_value))
-                        {
-
-                            csv.EditItemValue(column_name, i, genre);
-                            return;
-                        }
-                        break;
-                    case "mo":
-                        int toInt_mo = int.Parse(data);
-                        if (toInt_mo > int.Parse(com_value))
-                        {
-
-                            csv.EditItemValue(column_name, i, genre);
-                            return;
-                        }
-                        break;
-                }
-
-
-            }
-
-        }
-
         static internal string DefaultGenre
         {
-            get { return sd.DefaultSeries; }
+            get { return sb.DefaultSeries.Base_info.Name; }
         }
         static internal string[] AllSeriesNames
         {
-            get { return sd.AllSeriesNames; }
+            get { return sb.SeriesNameList; }
+        }
+        static internal string[] SeriesSortByView
+        {
+            get { return (from x in sb.SortedByView select x.Base_info.Name.ToString()).ToArray(); }
         }
         static internal int SeriesNameCount
         {
@@ -172,7 +80,14 @@ namespace paymentManger
         {
             get { return use_columns.ToArray(); }
         }
-#region DebugOnlyFunctoins
+        static private string Read_Json(string path)
+        {
+            StreamReader sr = new StreamReader(path);
+            string json = sr.ReadToEnd();
+            sr.Close();
+            return json;
+        }
+        #region DebugOnlyFunctoins
 #if DEBUG
         static internal void Json_Test()
         {
@@ -196,13 +111,13 @@ namespace paymentManger
                 PropertyNameCaseInsensitive = true
             };
 
-
-            string json_str = Read_Json_Debug(0);
-            var load_json1 = JsonSerializer.Deserialize<SeriesDatas>(json_str, options);
+            string json_str;
 
             /*
              *
              *jsonファイルの更新に伴ってデータの互換性が失われため
+            string json_str = Read_Json_Debug(0);
+            var load_json1 = JsonSerializer.Deserialize<SeriesDatas>(json_str, options);
             　json_str = Read_Json_Debug(1);
             　var load_json2 = JsonSerializer.Deserialize<Dictionary<string,SeriesBander>>(json_str,options);
             */

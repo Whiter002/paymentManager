@@ -54,17 +54,28 @@ namespace paymentManger.Class
             sort_by_view = SortByview();
 
         }
-
+        internal string[] UsedColumn
+        {
+            get { return used_column; }
+        }
         private string[] GetUsedColumn()
         {
-            return (from x in classificatable_series.Values select x.Classification.Keys.ToArray()).ToList()[0].ToArray();
+            string[][] datas = (from x in classificatable_series.Values select x.Classification.Keys.ToArray()).ToList().ToArray();
+
+            string[] output = new string[datas.Length];
+            for (int i=0;i<datas.Length;i++)
+            {
+                output[i] = datas[i][0];
+            }
+            return output;
+            //return new string[1];
         }
 
         private ClassificatableSeriesData[] SortBypriority()
         {
 
             List<ClassificatableSeriesData> all_series_datas = this.AllSeriesAsList;
-            List<ClassificatableSeriesData> sorted_series_less = new List<ClassificatableSeriesData>() ;
+            List<ClassificatableSeriesData> sorted_series_less = new List<ClassificatableSeriesData>();
             all_series_datas.RemoveAt(0);
             sorted_series_less.Add(all_series_datas[0]);
 
@@ -122,6 +133,16 @@ namespace paymentManger.Class
             get
             {
                 return classificatable_series.Keys.ToArray();
+            }
+        }
+        internal string[] SeriesNameList
+        {
+            get
+            {
+                List<string> seriesName = new List<string>();
+                seriesName.Add(default_series.Base_info.Name);
+                seriesName.AddRange(from x in classificatable_series.Values select x.Base_info.Name);
+                return seriesName.ToArray();
             }
         }
         internal int SeriesCount

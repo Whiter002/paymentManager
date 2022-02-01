@@ -82,8 +82,6 @@
     <Compile Include="Class\CSVExtender.cs" />
     <Compile Include="Class\CsvLoader.cs" />
     <Compile Include="Class\SeriesBander.cs" />
-    <Compile Include="Class\SeriesClassificationData.cs" />
-    <Compile Include="Class\SeriesDatas.cs" />
     <Compile Include="Forms\EditSeriesForm.cs">
       <SubType>Form</SubType>
     </Compile>
