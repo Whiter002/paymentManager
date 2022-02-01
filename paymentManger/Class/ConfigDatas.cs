@@ -72,6 +72,10 @@ namespace paymentManger
         {
             get { return (from x in sb.SortedByView select x.Base_info.Name.ToString()).ToArray(); }
         }
+        static internal string[] SeriesSortByPriority
+        {
+            get { return (from x in sb.SortedByPriority select x.Base_info.Name.ToString()).ToArray(); }
+        }
         static internal int SeriesNameCount
         {
             get { return AllSeriesNames.Length; }
@@ -79,6 +83,28 @@ namespace paymentManger
         static internal string[] UseColumns
         {
             get { return use_columns.ToArray(); }
+        }
+        static internal SeriesBander Series
+        {
+            get { return sb; }
+        }
+        static internal SeriesBander.ClassificatableSeriesData GetSeriesDataFromName(string name)
+        {
+
+            var other_series_datas = sb.OtherSeriesDatas;
+            List<SeriesBander.ClassificatableSeriesData> match_series_list = (from s in other_series_datas where (s.Base_info.Name.Equals(name)) select s).ToList();
+            if(match_series_list.Count > 0 ) return match_series_list[0];
+            return new SeriesBander.ClassificatableSeriesData();
+
+        }
+        static internal bool IsExistedSeriesName(string name)
+        {
+
+            var other_series_datas = sb.OtherSeriesDatas;
+            List<SeriesBander.ClassificatableSeriesData> match_series_list = (from s in other_series_datas where (s.Base_info.Name.Equals(name)) select s).ToList();
+
+            return match_series_list.Count > 0;
+
         }
         static private string Read_Json(string path)
         {

@@ -195,6 +195,7 @@ namespace paymentManger
                 string checkbox_name = serie.Name;
                 CheckBox checkBox = new CheckBox()
                 {
+                    AutoSize = true,
                     Location = location,
                     Text = checkbox_name,
                     Checked = true,
@@ -221,6 +222,7 @@ namespace paymentManger
             #endregion
 
         }
+
         #region デバック用の関数です。デバック時以外の時はコンパイルされません。
 #if DEBUG
         private void Test_Button_Click(object sender, EventArgs e)
@@ -274,6 +276,8 @@ namespace paymentManger
 
         private void 分類の追加ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var form = new EditSeriesForm();
+            form.SetSeriesBansder(ConfigDatas.Series);
             OpenForm(new EditSeriesForm());
         }
         private void 支払い情報の追加ToolStripMenuItem_Click(object sender, EventArgs e)

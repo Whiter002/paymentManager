@@ -15,16 +15,47 @@ namespace paymentManger.Class
             public string Name { get; set; }
             public int View_num { get; set; }
             public int priority { get; set; }
+            internal BasedSeriesData Duplicate()
+            {
+                BasedSeriesData copy = new BasedSeriesData();
+                copy.Name = this.Name;
+                copy.priority = this.priority;
+                copy.View_num = this.View_num;
+                return copy;
+            }
         };
         public struct ClassificationData
         {
             public string Op { get; set; }
             public List<string> Com_value { get; set; }
+            internal ClassificationData Duplicate()
+            {
+                ClassificationData cd = new ClassificationData();
+                cd.Op = this.Op;
+                cd.Com_value = new List<string>(this.Com_value);
+                return cd;
+            }
         }
         public struct ClassificatableSeriesData
         {
             public BasedSeriesData Base_info { get; set; }
             public Dictionary<string, ClassificationData> Classification { get; set; }
+            internal ClassificatableSeriesData Duplicate()
+            {
+
+
+                ClassificatableSeriesData copy = new ClassificatableSeriesData();
+                copy.Base_info = this.Base_info.Duplicate();
+                if (this.Classification == null) return copy;
+                copy.Classification = new Dictionary<string, ClassificationData>();
+
+                foreach (KeyValuePair<string, ClassificationData> kvp in this.Classification)
+                {
+                    copy.Classification.Add(kvp.Key, kvp.Value.Duplicate());
+
+                }
+                return copy;
+            }
         }
         #endregion
 
@@ -135,6 +166,14 @@ namespace paymentManger.Class
                 return classificatable_series.Keys.ToArray();
             }
         }
+        internal ClassificatableSeriesData[] OtherSeriesDatas
+        {
+            get { return classificatable_series.Values.ToList().ToArray(); }
+        }
+        internal ClassificatableSeriesData[] AllSeriesDatas
+        {
+            get { return classificatable_series.Values.ToList().ToArray(); }
+        }
         internal string[] SeriesNameList
         {
             get
@@ -177,6 +216,28 @@ namespace paymentManger.Class
         {
             get { return sort_by_priority; }
         }
+        /// <summary>
+        /// SeriesBanderの深いコピー
+        /// </summary>
+        /// <returns></returns>
+        internal SeriesBander Duplicate()
+        {
+
+            SeriesBander copy = new SeriesBander();
+            ClassificatableSeriesData default_series_copy = this.default_series.Duplicate();
+            Dictionary<string, ClassificatableSeriesData> classificatabl_eseries_copy = new Dictionary<string, ClassificatableSeriesData>();
+            foreach(var kvp in classificatable_series)
+            {
+                classificatabl_eseries_copy.Add(kvp.Key, kvp.Value.Duplicate());
+            }
+            copy.default_series_dummy = default_series_copy;
+            copy.classificatable_series_dummy = classificatabl_eseries_copy;
+            copy.Initialize();
+            return copy;
+
+
+        }
+        
 
     }
 }
