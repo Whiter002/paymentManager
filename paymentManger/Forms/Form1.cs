@@ -19,6 +19,12 @@ namespace paymentManger
 #if DEBUG
         string base_path = Path.Combine(Application.StartupPath, @"..\..\..\..\..\..");
         private System.Windows.Forms.Button Test_Button;
+        private System.Windows.Forms.Button DebugButton;
+        Type[] Debug_Forms = new Type[]
+        {
+            (new EditItemsForm()).GetType(),
+            (new DebugForm()).GetType()
+        };
 #else
             //デバッグ環境ではないときは実行ファイルとおなじフォルダを読み取りのベースパスにする
         string base_path = Path.Combine(Application.StartupPath);
@@ -218,6 +224,20 @@ namespace paymentManger
             this.Test_Button.UseVisualStyleBackColor = true;
             this.Test_Button.Click += new System.EventHandler(this.Test_Button_Click);
             this.Controls.Add(this.Test_Button);
+
+
+            // 
+            // Test_Button
+            // 
+            this.DebugButton = new System.Windows.Forms.Button();
+            this.DebugButton.Location = new System.Drawing.Point(402, 470);
+            this.DebugButton.Name = "Test_Button";
+            this.DebugButton.Size = new System.Drawing.Size(108, 23);
+            this.DebugButton.TabIndex = 3;
+            this.DebugButton.Text = "テストフォームを表示";
+            this.DebugButton.UseVisualStyleBackColor = true;
+            this.DebugButton.Click += new System.EventHandler(this.Debug_Button_Click);
+            this.Controls.Add(this.DebugButton);
 #endif
             #endregion
 
@@ -269,6 +289,16 @@ namespace paymentManger
             dup.Regist_New_Column("ジャンル",ConfigDatas.DefaultGenre);
             CSVExtender.ChangeGenreInCSV(ConfigDatas.sb, dup);
         }
+
+        private void Debug_Button_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < Debug_Forms.Length; i++)
+            {
+                ShowForm((Form)Activator.CreateInstance(Debug_Forms[i]));
+            }
+            
+
+        }
 #endif
         #endregion
 
@@ -284,11 +314,15 @@ namespace paymentManger
         {
             OpenForm(new EditItemsForm());
         }
-        private void OpenForm(Form form,bool this_enabled=false)
+        private void OpenForm(Form form,bool _turn_enabled_to_false = true)
         {
-            this.Enabled = this_enabled;
+            if(_turn_enabled_to_false) this.Enabled = false;
             DialogResult dr = form.ShowDialog();
             this.Enabled = true;
+        }
+        private void ShowForm(Form form)
+        {
+            form.Show();
         }
 
     }

@@ -81,6 +81,12 @@
     <Compile Include="Class\CSV.cs" />
     <Compile Include="Class\CSVExtender.cs" />
     <Compile Include="Class\SeriesBander.cs" />
+    <Compile Include="Forms\DebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DebugForm.Designer.cs">
+      <DependentUpon>DebugForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditSeriesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="Forms\EditItemsForm.Designer.cs">
       <DependentUpon>EditItemsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\DebugForm.resx">
+      <DependentUpon>DebugForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditSeriesForm.resx">
       <DependentUpon>EditSeriesForm.cs</DependentUpon>
     </EmbeddedResource>
